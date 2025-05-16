@@ -82,8 +82,4 @@ public class PageResponse<T> {
 		this.last = last;
 	}
     
-    
-    
-    
-
 }
