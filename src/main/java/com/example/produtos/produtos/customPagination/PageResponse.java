@@ -13,10 +13,9 @@ public record PageResponse<T>(
 	    boolean first,
 	    boolean last
 		)
+
 {
 	
-	
-    
     public PageResponse(Page<T> page) {
     	
        this(page.getContent(),
@@ -28,6 +27,5 @@ public record PageResponse<T>(
 	    	page.isLast() );
     	
     }
-
     
 }

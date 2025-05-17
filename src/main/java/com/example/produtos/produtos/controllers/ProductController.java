@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.produtos.produtos.customPagination.PageResponse;
@@ -22,8 +23,8 @@ public class ProductController {
 	private ProductService service;
 	
 	@GetMapping
-	public ResponseEntity<PageResponse<ProductDTO>> findAll(Pageable pageable){
-		PageResponse<ProductDTO> products = service.findAll(pageable);
+	public ResponseEntity<PageResponse<ProductDTO>> findAll(Pageable pageable,@RequestParam(required = false) String name){
+		PageResponse<ProductDTO> products = service.findAll(pageable,name);
         return ResponseEntity.ok().body(products);
 	}
 

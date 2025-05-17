@@ -19,10 +19,14 @@ public class ProductService {
 	private ProductRepository repository;
 
 	
-	public PageResponse<ProductDTO> findAll(Pageable pageable){
-		
+	public PageResponse<ProductDTO> findAll(Pageable pageable,String name){
+		Page<Product> products;
 		Pageable page = PageRequest.of(pageable.getPageNumber(), Math.min(pageable.getPageSize(),100),Sort.by("name"));
-		Page<Product> products = repository.findAll(page);
+		if (name != null && !name.isBlank()) {
+			products = repository.findByNameContainingIgnoreCase(name, page);
+		} else {
+			products = repository.findAll(page);
+		}
 		Page<ProductDTO> productDTOPage = products.map(ProductDTO::new);
 		return new PageResponse<>(productDTOPage);
 	}
